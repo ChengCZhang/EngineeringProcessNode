@@ -67,7 +67,6 @@ namespace EngineeringProcessNode
         /// </summary>
         public ProcessNodeRestrictions Restrictions { get; set; } = ProcessNodeRestrictions.None;
 
-
         private DateTime? plannedBeginTime;
         /// <summary>
         /// 计划开始时间 PBT
@@ -79,7 +78,6 @@ namespace EngineeringProcessNode
                     ? PlannedCompletionTime
                     : value;
         }
-
 
         private DateTime? actualBeginTime;
         /// <summary>
@@ -93,7 +91,6 @@ namespace EngineeringProcessNode
                 : value;
         }
 
-
         private DateTime? plannedCompletionTime;
         /// <summary>
         /// 计划完成时间 PCT
@@ -105,7 +102,6 @@ namespace EngineeringProcessNode
             ? PlannedBeginTime
             : value;
         }
-
 
         private DateTime? actualCompletionTime;
         /// <summary>
@@ -129,13 +125,10 @@ namespace EngineeringProcessNode
         /// </summary>
         public TimeSpan? ActualTimeInterval => ActualBeginTime.HasValue && ActualCompletionTime.HasValue ? (TimeSpan?)(ActualCompletionTime.Value - ActualBeginTime.Value) : null;
 
-
-
         /// <summary>
         /// 上级节点
         /// </summary>
         public Dictionary<ProcessNodeBranch, List<string>> PreviousNode { get; set; }
-
 
         /// <summary>
         /// 下级节点
