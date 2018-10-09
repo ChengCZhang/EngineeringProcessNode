@@ -84,16 +84,16 @@ namespace EngineeringProcessNode
     public enum ProcessNodeBranch
     {
         /// <summary>
-        /// 
+        /// 默认分支
         /// </summary>
         Zero,
         /// <summary>
-        /// 
+        /// 分支1
         /// </summary>
         One,
         /// <summary>
-        /// 
+        /// 分支2
         /// </summary>
-        Two
+        Two,
     }
 }

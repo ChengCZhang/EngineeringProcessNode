@@ -8,6 +8,8 @@ namespace EngineeringProcessNode
     /// </summary>
     public class ProcessNode
     {
+        #region 构造函数
+
         /// <summary>
         /// 默认初始化
         /// </summary>
@@ -23,6 +25,16 @@ namespace EngineeringProcessNode
         {
             InternalName = name;
         }
+
+        //public ProcessNode()
+        //{
+
+        //}
+
+
+        #endregion
+
+        #region 属性
 
         /// <summary>
         /// 内部名称，节点的唯一标识
@@ -77,7 +89,7 @@ namespace EngineeringProcessNode
         {
             get => actualBeginTime;
             set => actualBeginTime = ActualCompletionTime.HasValue && value.HasValue && (ActualCompletionTime.Value - value.Value).TotalMilliseconds < 0
-                ? ActualCompletionTime 
+                ? ActualCompletionTime
                 : value;
         }
 
@@ -102,10 +114,22 @@ namespace EngineeringProcessNode
         public DateTime? ActualCompletionTime
         {
             get => actualCompletionTime;
-            set => actualCompletionTime = ActualBeginTime.HasValue && value.HasValue && (ActualBeginTime.Value - value.Value).TotalMilliseconds > 0 
-                ? ActualBeginTime 
+            set => actualCompletionTime = ActualBeginTime.HasValue && value.HasValue && (ActualBeginTime.Value - value.Value).TotalMilliseconds > 0
+                ? ActualBeginTime
                 : value;
         }
+
+        /// <summary>
+        /// 计划时间间隔
+        /// </summary>
+        public TimeSpan? PlannedTimeInterval => PlannedBeginTime.HasValue && PlannedCompletionTime.HasValue ? (TimeSpan?)(PlannedCompletionTime.Value - PlannedBeginTime.Value) : null;
+
+        /// <summary>
+        /// 实际时间间隔
+        /// </summary>
+        public TimeSpan? ActualTimeInterval => ActualBeginTime.HasValue && ActualCompletionTime.HasValue ? (TimeSpan?)(ActualCompletionTime.Value - ActualBeginTime.Value) : null;
+
+
 
         /// <summary>
         /// 上级节点
@@ -118,15 +142,6 @@ namespace EngineeringProcessNode
         /// </summary>
         public Dictionary<ProcessNodeBranch, List<string>> NextNode { get; set; }
 
-
-        /// <summary>
-        /// 计划时间间隔
-        /// </summary>
-        public TimeSpan? PlannedTimeInterval => PlannedBeginTime.HasValue && PlannedCompletionTime.HasValue ? (TimeSpan?)(PlannedCompletionTime.Value - PlannedBeginTime.Value) : null;
-
-        /// <summary>
-        /// 实际时间间隔
-        /// </summary>
-        public TimeSpan? ActualTimeInterval => ActualBeginTime.HasValue && ActualCompletionTime.HasValue ? (TimeSpan?) (ActualCompletionTime.Value - ActualBeginTime.Value) : null;
+        #endregion
     }
 }
