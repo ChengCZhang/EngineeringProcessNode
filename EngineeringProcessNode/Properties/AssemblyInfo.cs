@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EngineeringProcessNode")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Chanple")]
 [assembly: AssemblyProduct("EngineeringProcessNode")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2018 Chanple Cai")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
