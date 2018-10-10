@@ -18,19 +18,6 @@ namespace EngineeringProcessNode
 
         }
 
-        /// <summary>
-        /// 根据节点名称初始化
-        /// </summary>
-        public ProcessNode(string name)
-        {
-            InternalName = name;
-        }
-
-        //public ProcessNode()
-        //{
-
-        //}
-
 
         #endregion
 
@@ -40,7 +27,7 @@ namespace EngineeringProcessNode
         /// 内部名称，节点的唯一标识
         /// </summary>
         /// <remarks>内部名称确认后不要随意修改</remarks>
-        public string InternalName { get; set; }
+        public Guid InternalName { get; set; }
 
         /// <summary>
         /// 是否启用节点
@@ -50,12 +37,12 @@ namespace EngineeringProcessNode
         /// <summary>
         /// 节点基本状态 BS
         /// </summary>
-        public ProcessNodeBaseStatus BaseStatus { get; set; } = ProcessNodeBaseStatus.Waiting;
+        public ProcessNodeBaseState BaseState { get; set; } = ProcessNodeBaseState.Waiting;
 
         /// <summary>
         /// 节点进度状态 PS
         /// </summary>
-        public ProcessNodeProgressStatus ProgressStatus { get; set; } = ProcessNodeProgressStatus.OnSchedule;
+        public ProcessNodeProgressState ProgressState { get; set; } = ProcessNodeProgressState.OnSchedule;
 
         /// <summary>
         /// 节点特殊状态码，非唯一 SS
@@ -82,7 +69,7 @@ namespace EngineeringProcessNode
         private DateTime? actualBeginTime;
         /// <summary>
         /// 实际开始时间 ABT
-        /// </summary
+        /// </summary>
         public DateTime? ActualBeginTime
         {
             get => actualBeginTime;
@@ -128,12 +115,12 @@ namespace EngineeringProcessNode
         /// <summary>
         /// 上级节点
         /// </summary>
-        public Dictionary<ProcessNodeBranch, List<string>> PreviousNode { get; set; }
+        public Dictionary<ProcessNodeBranch, List<Guid>> PreviousNode { get; set; }
 
         /// <summary>
         /// 下级节点
         /// </summary>
-        public Dictionary<ProcessNodeBranch, List<string>> NextNode { get; set; }
+        public Dictionary<ProcessNodeBranch, List<Guid>> NextNode { get; set; }
 
         #endregion
     }

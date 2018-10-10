@@ -11,6 +11,8 @@ namespace EngineeringProcessNode
     /// </summary>
     public static class ProcessNodeHelper
     {
+        #region 计划时间修改
+
         /// <summary>
         /// 固定计划开始时间，增加天数，修改计划结束时间
         /// </summary>
@@ -66,5 +68,78 @@ namespace EngineeringProcessNode
             }
             return node;
         }
+
+
+        #endregion
+
+        #region 状态增加、删除、判断是否存在
+
+        /// <summary>
+        /// 增加特殊状态 SS
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要增加的特殊状态</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode AddState(this ProcessNode node, ProcessNodeSpecialState state)
+        {
+            node.SpecialState |= state;
+            return node;
+        }
+
+        /// <summary>
+        /// 增加约束条件 ST
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要增加的约束条件</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode AddState(this ProcessNode node, ProcessNodeRestrictions state)
+        {
+            node.Restrictions |= state;
+            return node;
+        }
+
+        /// <summary>
+        /// 删除特殊状态 SS
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要删除的特殊状态</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode DeleteState(this ProcessNode node, ProcessNodeSpecialState state)
+        {
+            node.SpecialState &= ~state;
+            return node;
+        }
+
+        /// <summary>
+        /// 删除约束条件 ST
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要删除的约束条件</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode DeleteState(this ProcessNode node, ProcessNodeRestrictions state)
+        {
+            node.Restrictions &= ~state;
+            return node;
+        }
+
+        /// <summary>
+        /// 是否存在特殊状态 SS
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要判断是否存在的状态</param>
+        /// <returns>指示是否存在</returns>
+        public static bool HasState(this ProcessNode node, ProcessNodeSpecialState state) => (node.SpecialState & state) == state;
+
+        /// <summary>
+        /// 是否存在约束条件 ST
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="state">要判断是否存在的状态</param>
+        /// <returns>指示是否存在</returns>
+        public static bool HasState(this ProcessNode node, ProcessNodeRestrictions state) => (node.Restrictions & state) == state;
+
+        #endregion
+
+
     }
 }

@@ -10,7 +10,7 @@ namespace EngineeringProcessNode
     /// <summary>
     /// 节点基本状态
     /// </summary>
-    public enum ProcessNodeBaseStatus
+    public enum ProcessNodeBaseState
     {
         /// <summary>
         /// 等待开始
@@ -32,7 +32,7 @@ namespace EngineeringProcessNode
     /// <summary>
     /// 节点进度状态
     /// </summary>
-    public enum ProcessNodeProgressStatus
+    public enum ProcessNodeProgressState
     {
         /// <summary>
         /// 早于允许时间
