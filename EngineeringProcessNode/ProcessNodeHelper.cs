@@ -78,11 +78,11 @@ namespace EngineeringProcessNode
         /// 增加特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要增加的特殊状态</param>
+        /// <param name="Status">要增加的特殊状态</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode AddState(this ProcessNode node, ProcessNodeSpecialState state)
+        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeSpecialStatus Status)
         {
-            node.SpecialState |= state;
+            node.SpecialStatus |= Status;
             return node;
         }
 
@@ -90,11 +90,11 @@ namespace EngineeringProcessNode
         /// 增加约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要增加的约束条件</param>
+        /// <param name="Status">要增加的约束条件</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode AddState(this ProcessNode node, ProcessNodeRestrictions state)
+        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeRestrictions Status)
         {
-            node.Restrictions |= state;
+            node.Restrictions |= Status;
             return node;
         }
 
@@ -102,11 +102,11 @@ namespace EngineeringProcessNode
         /// 删除特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要删除的特殊状态</param>
+        /// <param name="Status">要删除的特殊状态</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode DeleteState(this ProcessNode node, ProcessNodeSpecialState state)
+        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeSpecialStatus Status)
         {
-            node.SpecialState &= ~state;
+            node.SpecialStatus &= ~Status;
             return node;
         }
 
@@ -114,11 +114,11 @@ namespace EngineeringProcessNode
         /// 删除约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要删除的约束条件</param>
+        /// <param name="Status">要删除的约束条件</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode DeleteState(this ProcessNode node, ProcessNodeRestrictions state)
+        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeRestrictions Status)
         {
-            node.Restrictions &= ~state;
+            node.Restrictions &= ~Status;
             return node;
         }
 
@@ -126,17 +126,17 @@ namespace EngineeringProcessNode
         /// 是否存在特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要判断是否存在的状态</param>
+        /// <param name="Status">要判断是否存在的状态</param>
         /// <returns>指示是否存在</returns>
-        public static bool HasState(this ProcessNode node, ProcessNodeSpecialState state) => (node.SpecialState & state) == state;
+        public static bool HasStatus(this ProcessNode node, ProcessNodeSpecialStatus Status) => (node.SpecialStatus & Status) == Status;
 
         /// <summary>
         /// 是否存在约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="state">要判断是否存在的状态</param>
+        /// <param name="Status">要判断是否存在的状态</param>
         /// <returns>指示是否存在</returns>
-        public static bool HasState(this ProcessNode node, ProcessNodeRestrictions state) => (node.Restrictions & state) == state;
+        public static bool HasStatus(this ProcessNode node, ProcessNodeRestrictions Status) => (node.Restrictions & Status) == Status;
 
         #endregion
 

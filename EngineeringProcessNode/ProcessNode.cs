@@ -37,17 +37,17 @@ namespace EngineeringProcessNode
         /// <summary>
         /// 节点基本状态 BS
         /// </summary>
-        public ProcessNodeBaseState BaseState { get; set; } = ProcessNodeBaseState.Waiting;
+        public ProcessNodeBaseStatus BaseStatus { get; set; } = ProcessNodeBaseStatus.Waiting;
 
         /// <summary>
         /// 节点进度状态 PS
         /// </summary>
-        public ProcessNodeProgressState ProgressState { get; set; } = ProcessNodeProgressState.OnSchedule;
+        public ProcessNodeProgressStatus ProgressStatus { get; set; } = ProcessNodeProgressStatus.OnSchedule;
 
         /// <summary>
         /// 节点特殊状态码，非唯一 SS
         /// </summary>
-        public ProcessNodeSpecialState SpecialState { get; set; } = ProcessNodeSpecialState.None;
+        public ProcessNodeSpecialStatus SpecialStatus { get; set; } = ProcessNodeSpecialStatus.None;
 
         /// <summary>
         /// 节点约束条件码，非唯一 RT
