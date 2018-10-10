@@ -37,12 +37,7 @@ namespace EngineeringProcessNode
         /// <summary>
         /// 节点基本状态 BS
         /// </summary>
-        public ProcessNodeBaseStatus BaseStatus { get; set; } = ProcessNodeBaseStatus.Waiting;
-
-        /// <summary>
-        /// 节点进度状态 PS
-        /// </summary>
-        public ProcessNodeProgressStatus ProgressStatus { get; set; } = ProcessNodeProgressStatus.OnSchedule;
+        public ProcessNodeBaseStatus BaseStatus { get; set; } = ProcessNodeBaseStatus.None;
 
         /// <summary>
         /// 节点特殊状态码，非唯一 SS
@@ -111,6 +106,16 @@ namespace EngineeringProcessNode
         /// 实际时间间隔
         /// </summary>
         public TimeSpan? ActualTimeInterval => ActualBeginTime.HasValue && ActualCompletionTime.HasValue ? (TimeSpan?)(ActualCompletionTime.Value - ActualBeginTime.Value) : null;
+
+        /// <summary>
+        /// 上级分支，从哪来
+        /// </summary>
+        public ProcessNodeBranch PreviousBranch { get; set; } = ProcessNodeBranch.Zero;
+
+        /// <summary>
+        /// 下级分支，到哪去
+        /// </summary>
+        public ProcessNodeBranch NextBranch { get; set; } = ProcessNodeBranch.Zero;
 
         /// <summary>
         /// 上级节点

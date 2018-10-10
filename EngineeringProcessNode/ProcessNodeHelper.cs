@@ -18,7 +18,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="days">要增加的天数（正）</param>
-        public static ProcessNode IncreaseDaysbyPBT(this ProcessNode node, uint days)
+        public static ProcessNode IncreaseDaysbyPbt(this ProcessNode node, uint days)
         {
             if (node.PlannedBeginTime.HasValue)
             {
@@ -32,7 +32,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="hours">要增加的小时数（正）</param>
-        public static ProcessNode IncreaseHoursbyPBT(this ProcessNode node, uint hours)
+        public static ProcessNode IncreaseHoursbyPbt(this ProcessNode node, uint hours)
         {
             if (node.PlannedBeginTime.HasValue)
             {
@@ -46,7 +46,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="days">要减少的天数（正）</param>
-        public static ProcessNode ReduceDaysbyPCT(this ProcessNode node, uint days)
+        public static ProcessNode ReduceDaysbyPct(this ProcessNode node, uint days)
         {
             if (node.PlannedCompletionTime.HasValue)
             {
@@ -60,7 +60,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="hours">要减少的小时（正）</param>
-        public static ProcessNode ReduceHoursbyPCT(this ProcessNode node, uint hours)
+        public static ProcessNode ReduceHoursbyPct(this ProcessNode node, uint hours)
         {
             if (node.PlannedCompletionTime.HasValue)
             {
@@ -72,17 +72,44 @@ namespace EngineeringProcessNode
 
         #endregion
 
-        #region 状态增加、删除、判断是否存在
+        #region 位运算相关
+
+        /// <summary>
+        /// 设置基本状态 BS
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要设置的基本状态</param>
+        /// <remarks>基本状态低8位状态和高8位状态分别是唯一的</remarks>
+        /// <returns>返回自身</returns>
+        public static ProcessNode SetStatus(this ProcessNode node, ProcessNodeBaseStatus status)
+        {
+            //todo 
+            //没有做bitcount：
+            if (((uint)status & 0xff) != 0)
+            {
+                //低位
+                node.BaseStatus &= (ProcessNodeBaseStatus)0xff00 & status;
+            }
+
+            if ((uint)status >> 8 != 0)
+            {
+                //高位
+                node.BaseStatus &= (ProcessNodeBaseStatus)0x00ff & status;
+            }
+            return node;
+        }
+
+        #region 添加
 
         /// <summary>
         /// 增加特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要增加的特殊状态</param>
+        /// <param name="status">要增加的特殊状态</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeSpecialStatus Status)
+        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeSpecialStatus status)
         {
-            node.SpecialStatus |= Status;
+            node.SpecialStatus |= status;
             return node;
         }
 
@@ -90,23 +117,51 @@ namespace EngineeringProcessNode
         /// 增加约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要增加的约束条件</param>
+        /// <param name="status">要增加的约束条件</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeRestrictions Status)
+        public static ProcessNode AddStatus(this ProcessNode node, ProcessNodeRestrictions status)
         {
-            node.Restrictions |= Status;
+            node.Restrictions |= status;
             return node;
         }
+
+        /// <summary>
+        /// 增加上级分支
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要增加的上级分支</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode AddBranchPre(this ProcessNode node, ProcessNodeBranch status)
+        {
+            node.PreviousBranch |= status;
+            return node;
+        }
+
+        /// <summary>
+        /// 增加下级分支
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要增加的下级分支</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode AddBranchNex(this ProcessNode node, ProcessNodeBranch status)
+        {
+            node.NextBranch |= status;
+            return node;
+        }
+
+        #endregion
+
+        #region 删除
 
         /// <summary>
         /// 删除特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要删除的特殊状态</param>
+        /// <param name="status">要删除的特殊状态</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeSpecialStatus Status)
+        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeSpecialStatus status)
         {
-            node.SpecialStatus &= ~Status;
+            node.SpecialStatus &= ~status;
             return node;
         }
 
@@ -114,29 +169,84 @@ namespace EngineeringProcessNode
         /// 删除约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要删除的约束条件</param>
+        /// <param name="status">要删除的约束条件</param>
         /// <returns>返回自身</returns>
-        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeRestrictions Status)
+        public static ProcessNode DeleteStatus(this ProcessNode node, ProcessNodeRestrictions status)
         {
-            node.Restrictions &= ~Status;
+            node.Restrictions &= ~status;
             return node;
         }
+
+        /// <summary>
+        /// 删除上级分支
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要删除的上级分支</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode DeleteBranchPre(this ProcessNode node, ProcessNodeBranch status)
+        {
+            node.PreviousBranch &= ~status;
+            return node;
+        }
+
+        /// <summary>
+        /// 删除下级分支
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要删除的特殊状态</param>
+        /// <returns>返回自身</returns>
+        public static ProcessNode DeleteBranchNex(this ProcessNode node, ProcessNodeBranch status)
+        {
+            node.NextBranch &= ~status;
+            return node;
+        }
+
+        #endregion
+
+
+        #region 查询
 
         /// <summary>
         /// 是否存在特殊状态 SS
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要判断是否存在的状态</param>
+        /// <param name="status">要判断是否存在的状态</param>
         /// <returns>指示是否存在</returns>
-        public static bool HasStatus(this ProcessNode node, ProcessNodeSpecialStatus Status) => (node.SpecialStatus & Status) == Status;
+        public static bool HasStatus(this ProcessNode node, ProcessNodeSpecialStatus status) => (node.SpecialStatus & status) == status;
 
         /// <summary>
         /// 是否存在约束条件 ST
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="Status">要判断是否存在的状态</param>
+        /// <param name="status">要判断是否存在的状态</param>
         /// <returns>指示是否存在</returns>
-        public static bool HasStatus(this ProcessNode node, ProcessNodeRestrictions Status) => (node.Restrictions & Status) == Status;
+        public static bool HasStatus(this ProcessNode node, ProcessNodeRestrictions status) => (node.Restrictions & status) == status;
+
+        /// <summary>
+        /// 是否存在基本状态 BS
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要判断是否存在的基本状态</param>
+        /// <returns>指示是否存在</returns>
+        public static bool HasStatus(this ProcessNode node, ProcessNodeBaseStatus status) => (node.BaseStatus & status) == status;
+
+        /// <summary>
+        /// 是否存在上级分支 
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要判断是否存在的分支</param>
+        /// <returns>指示是否存在</returns>
+        public static bool HasBranchPre(this ProcessNode node, ProcessNodeBranch status) => (node.PreviousBranch & status) == status;
+
+        /// <summary>
+        /// 是否存在下级分支 
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="status">要判断是否存在的分支</param>
+        /// <returns>指示是否存在</returns>
+        public static bool HasBranchNex(this ProcessNode node, ProcessNodeBranch status) => (node.NextBranch & status) == status;
+
+        #endregion
 
         #endregion
 
