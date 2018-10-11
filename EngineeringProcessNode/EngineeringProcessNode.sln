@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineeringProcessNode", "EngineeringProcessNode.csproj", "{8EA8C671-4719-4A2A-8498-E7E2CCF57F0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineeringProcessNodeTests", "..\EngineeringProcessNodeTests\EngineeringProcessNodeTests.csproj", "{42C22E3C-311C-4D2F-967A-B04C55F1DF08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8EA8C671-4719-4A2A-8498-E7E2CCF57F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA8C671-4719-4A2A-8498-E7E2CCF57F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA8C671-4719-4A2A-8498-E7E2CCF57F0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C22E3C-311C-4D2F-967A-B04C55F1DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C22E3C-311C-4D2F-967A-B04C55F1DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C22E3C-311C-4D2F-967A-B04C55F1DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C22E3C-311C-4D2F-967A-B04C55F1DF08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
