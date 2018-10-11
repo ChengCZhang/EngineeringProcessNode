@@ -17,6 +17,7 @@ namespace EngineeringProcessNode
         /// 缺省状态
         /// </summary>
         [Description("缺省")]
+
         None = 0x0000,
         /// <summary>
         /// 等待开始
