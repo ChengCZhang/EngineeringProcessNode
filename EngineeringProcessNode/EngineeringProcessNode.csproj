@@ -45,6 +45,7 @@
     <Compile Include="ProcessNode.cs" />
     <Compile Include="ProcessNodeHelper.cs" />
     <Compile Include="ProcessNodeStatus.cs" />
+    <Compile Include="ProcessNodeTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
