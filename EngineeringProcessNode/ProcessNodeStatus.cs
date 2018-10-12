@@ -62,7 +62,7 @@ namespace EngineeringProcessNode
         /// 缺省状态
         /// </summary>
         [Description("缺省")]
-        None = 0x0000,
+        None = 0,
 
     }
 
@@ -76,7 +76,7 @@ namespace EngineeringProcessNode
         /// 缺省状态
         /// </summary>
         [Description("缺省")]
-        None = 0x0000,
+        None = 0,
     }
 
     /// <summary>
@@ -88,18 +88,57 @@ namespace EngineeringProcessNode
         /// <summary>
         /// 默认分支
         /// </summary>
-        Zero = 0x0000,
+        [Description("缺省")]
+        Zero = 0,
         /// <summary>
         /// 分支1
         /// </summary>
+        [Description("分支1")]
         One = 1 << 1,
+        /// <summary>
+        /// 分支1的别名
+        /// </summary>
+        [Description("是")]
+        Yes = 1 << 1,
         /// <summary>
         /// 分支2
         /// </summary>
+        [Description("分支2")]
         Two = 1 << 2,
+        /// <summary>
+        /// 分支2的别名
+        /// </summary>
+        [Description("否")]
+        No = 1 << 2,
         /// <summary>
         /// 分支3
         /// </summary>
+        [Description("分支3")]
         Three = 1 << 3,
+        /// <summary>
+        /// 分支4
+        /// </summary>
+        [Description("分支4")]
+        Four = 1 << 4,
+        /// <summary>
+        /// 分支5
+        /// </summary>
+        [Description("分支5")]
+        Five = 1 << 5,
+        /// <summary>
+        /// 分支6
+        /// </summary>
+        [Description("分支6")]
+        Six = 1 << 6,
+        /// <summary>
+        /// 分支7
+        /// </summary>
+        [Description("分支7")]
+        Seven = 1 << 7,
+        /// <summary>
+        /// 分支8
+        /// </summary>
+        [Description("分支8")]
+        Eight = 1 << 8,
     }
 }
