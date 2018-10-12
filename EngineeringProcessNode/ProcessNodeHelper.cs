@@ -18,7 +18,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="days">要增加的天数（正）</param>
-        public static ProcessNode IncreaseDaysbyPbt(this ProcessNode node, uint days)
+        public static ProcessNode IncreaseDaysbyPbt(this ProcessNode node, int days)
         {
             if (node.PlannedBeginTime.HasValue)
             {
@@ -32,7 +32,7 @@ namespace EngineeringProcessNode
         /// </summary>
         /// <param name="node">节点</param>
         /// <param name="hours">要增加的小时数（正）</param>
-        public static ProcessNode IncreaseHoursbyPbt(this ProcessNode node, uint hours)
+        public static ProcessNode IncreaseHoursbyPbt(this ProcessNode node, int hours)
         {
             if (node.PlannedBeginTime.HasValue)
             {
@@ -45,9 +45,13 @@ namespace EngineeringProcessNode
         /// 固定计划结束时间，减少天数，修改计划开始时间
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="days">要减少的天数（正）</param>
-        public static ProcessNode ReduceDaysbyPct(this ProcessNode node, uint days)
+        /// <param name="days">要减少的天数</param>
+        public static ProcessNode ReduceDaysbyPct(this ProcessNode node, int days)
         {
+           // if (days>0)
+           // {
+           //     Math.Abs(days);
+           // }
             if (node.PlannedCompletionTime.HasValue)
             {
                 node.PlannedBeginTime = node.PlannedCompletionTime.Value.AddDays(-days);
@@ -59,12 +63,12 @@ namespace EngineeringProcessNode
         /// 固定计划结束时间，减少小时，修改计划开始时间
         /// </summary>
         /// <param name="node">节点</param>
-        /// <param name="hours">要减少的小时（正）</param>
-        public static ProcessNode ReduceHoursbyPct(this ProcessNode node, uint hours)
+        /// <param name="hours">要减少的小时</param>
+        public static ProcessNode ReduceHoursbyPct(this ProcessNode node, int hours)
         {
             if (node.PlannedCompletionTime.HasValue)
             {
-                node.PlannedBeginTime = node.PlannedCompletionTime.Value.AddHours(-hours);
+                node.PlannedBeginTime = node.PlannedCompletionTime.Value.AddHours(hours);
             }
             return node;
         }

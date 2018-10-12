@@ -11,7 +11,9 @@ namespace EngineeringProcessNode.Tests
     [TestClass()]
     public class ProcessNodeHelperTests
     {
-
+        /// <summary>
+        /// 固定计划开始时间，增加天数
+        /// </summary>
         [TestMethod()]
         public void IncreaseDaysbyPbtTest()
         {
@@ -27,25 +29,57 @@ namespace EngineeringProcessNode.Tests
 
             Assert.IsTrue(node.IncreaseDaysbyPbt(1).PlannedCompletionTime == node.PlannedCompletionTime);
         }
-
+        
+        /// <summary>
+        /// 固定计划开始时间，增加小时
+        /// </summary>
         [TestMethod()]
         public void IncreaseHoursbyPbtTest()
         {
             var node = new ProcessNode();
-            Assert.Fail();
-        }
+            Assert.IsTrue(node.IncreaseHoursbyPbt(0).PlannedCompletionTime == node.PlannedBeginTime);
+            node.PlannedBeginTime = DateTime.Now;
 
+            Assert.IsTrue(node.IncreaseHoursbyPbt(0).PlannedCompletionTime == node.PlannedBeginTime);
+
+            Assert.IsTrue(node.IncreaseHoursbyPbt(1).PlannedCompletionTime == node.PlannedBeginTime.Value.AddHours(1));
+            node.PlannedBeginTime = null;
+
+            Assert.IsTrue(node.IncreaseHoursbyPbt(1).PlannedCompletionTime == node.PlannedCompletionTime);
+        }
+        /// <summary>
+        /// 固定计划结束时间，减少时间
+        /// </summary>
         [TestMethod()]
         public void ReduceDaysbyPctTest()
         {
             var node = new ProcessNode();
-            Assert.Fail();
-        }
+            Assert.IsTrue(node.ReduceDaysbyPct(0).PlannedBeginTime == node.PlannedCompletionTime);
+            //node.PlannedCompletionTime = DateTime.Now;
+            //
+            //Assert.IsTrue(node.ReduceDaysbyPct(0).PlannedBeginTime == node.PlannedCompletionTime);
 
+            Assert.IsTrue(node.ReduceDaysbyPct(1).PlannedBeginTime == node.PlannedCompletionTime.Value.AddDays(1));
+            node.PlannedBeginTime = null;
+
+            Assert.IsTrue(node.ReduceDaysbyPct(1).PlannedBeginTime == node.PlannedCompletionTime);
+        }
+        /// <summary>
+        /// 固定计划结束时间，减少小时,修改计划开始时间
+        /// </summary>
         [TestMethod()]
         public void ReduceHoursbyPctTest()
         {
             var node = new ProcessNode();
+            Assert.IsTrue(node.ReduceHoursbyPct(-2).PlannedBeginTime == node.PlannedCompletionTime);
+            node.PlannedBeginTime = DateTime.Now;
+            
+            Assert.IsTrue(node.ReduceHoursbyPct(0).PlannedCompletionTime == node.PlannedCompletionTime);
+            
+            Assert.IsTrue(node.ReduceHoursbyPct(1).PlannedCompletionTime == node.PlannedCompletionTime.Value.AddHours(1));
+            node.PlannedBeginTime = null;
+            
+            Assert.IsTrue(node.ReduceHoursbyPct(1).PlannedBeginTime == node.PlannedBeginTime);
             Assert.Fail();
         }
 
@@ -61,6 +95,7 @@ namespace EngineeringProcessNode.Tests
         {
             var node = new ProcessNode();
             Assert.Fail();
+            
         }
 
         [TestMethod()]
