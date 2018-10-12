@@ -48,10 +48,10 @@ namespace EngineeringProcessNode
         /// <param name="days">要减少的天数</param>
         public static ProcessNode ReduceDaysbyPct(this ProcessNode node, int days)
         {
-           // if (days>0)
-           // {
-           //     Math.Abs(days);
-           // }
+            //if (days>0)
+            //{
+            //    Math.Abs(days);
+            //}
             if (node.PlannedCompletionTime.HasValue)
             {
                 node.PlannedBeginTime = node.PlannedCompletionTime.Value.AddDays(-days);

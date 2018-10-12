@@ -48,7 +48,7 @@ namespace EngineeringProcessNode.Tests
             Assert.IsTrue(node.IncreaseHoursbyPbt(1).PlannedCompletionTime == node.PlannedCompletionTime);
         }
         /// <summary>
-        /// 固定计划结束时间，减少时间
+        /// 固定计划结束时间，减少时间,修改计划开始时间
         /// </summary>
         [TestMethod()]
         public void ReduceDaysbyPctTest()
